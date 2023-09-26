@@ -129,3 +129,19 @@ router.get("/verify", isAuthenticated, (req, res, next) => {
 });
 
 module.exports = router;
+
+
+
+// The isAuthenticated middleware is only used in the router.get("/verify", isAuthenticated, ...) route. This means that this specific route, which is responsible for verifying the authenticity of a JWT token and returning user data, is protected by the middleware. Any request to this route must include a valid JWT token in the "Authorization" header, or it will not be authorized.
+// However, the /signup and /login routes do not use the isAuthenticated middleware. 
+// These routes are typically used for user registration and login processes, and 
+// they are not protected by JWT authentication because users need to access them 
+// without authentication to create an account or log in.
+// In short, /signup and /login are public routes and can be accessed without a JWT token. 
+// They are used for user registration and authentication.
+
+// /verify is a protected route and can only be accessed with a valid JWT token in the "Authorization" header. 
+// It is used to verify the authenticity of the token and return user data.
+
+// it is common practice to use that token for authenticating the user's subsequent activities, 
+// such as making POST, PUT, DELETE, or other requests to protected endpoints. 
